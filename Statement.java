@@ -25,12 +25,12 @@ public class Statement {
     }
 
     private double calculateRentalAmount(Rental rental) {
-        return rental.getRentalAmount();
+        return rental.getCharge();
     }
 
     private int calculateFrequentRenterPoints(Rental rental) {
         int points = 1;
-        points += rental.calculateFrequentRenterPoints();
+        points += rental.getCharge();
         return points;
     }
 
