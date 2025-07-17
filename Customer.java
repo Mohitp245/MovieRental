@@ -18,7 +18,7 @@ public class Customer {
         return customerName;
     }
 
-    
+    //Mohit edited here
     public String prinStatement() {
 
         int frequentRenterPoints = 0;
