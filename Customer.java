@@ -49,5 +49,37 @@ public class Customer {
         return result.toString();
     }
 
+    public String printStatementXML() {
+        int frequentRenterPoints = 0;
+        double totalAmount = 0;
+        StringBuilder result = new StringBuilder();
+  
+        result.append("&lt;customer&gt;\n");
+        result.append("  &lt;name&gt;").append(getName()).append("&lt;/name&gt;\n");
+        result.append("  &lt;rentals&gt;\n");
+  
+        for (Rental currentRental : customerRentals) {
+            double currentAmount = currentRental.getRentalAmount();
+  
+            // add frequent renter points
+            frequentRenterPoints++;
+            frequentRenterPoints += currentRental.calculateFrequentRenterPoints();
+  
+            result.append("    &lt;rental&gt;\n");
+            result.append("      &lt;movie&gt;").append(currentRental.getMovie().getTitle()).append("&lt;/movie&gt;\n");
+            result.append("      &lt;amount&gt;").append(currentAmount).append("&lt;/amount&gt;\n");
+            result.append("    &lt;/rental&gt;\n");
+  
+            totalAmount += currentAmount;
+        }
+  
+        result.append("  &lt;/rentals&gt;\n");
+        result.append("  &lt;totalAmount&gt;").append(totalAmount).append("&lt;/totalAmount&gt;\n");
+        result.append("  &lt;frequentRenterPoints&gt;").append(frequentRenterPoints).append("&lt;/frequentRenterPoints&gt;\n");
+        result.append("&lt;/customer&gt;");
+  
+        return result.toString();
+    }
+
 }
 // Testing
