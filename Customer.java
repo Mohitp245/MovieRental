@@ -18,6 +18,7 @@ public class Customer {
         return customerName;
     }
 
+    
     public String prinStatement() {
 
         int frequentRenterPoints = 0;
