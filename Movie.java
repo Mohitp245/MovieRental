@@ -1,30 +1,24 @@
 public class Movie {
 
     private final String title;
-    private Prices priceCode;
+    private final PriceCalculator priceCalculator;
+    private final FrequentRenterPointsCalculator pointsCalculator;
 
-    public Movie(String title, Prices priceCode) {
+    public Movie(String title, PriceCalculator priceCalculator, FrequentRenterPointsCalculator pointsCalculator) {
         this.title = title;
-        this.priceCode = priceCode;
+        this.priceCalculator = priceCalculator;
+        this.pointsCalculator = pointsCalculator;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Prices getPriceCode() {
-        return priceCode;
-    }
-
-    public void setPriceCode(Prices priceCode) {
-        this.priceCode = priceCode;
-    }
-
     public double getCharge(int daysRented) {
-        return priceCode.calculateCharge(daysRented);
+        return priceCalculator.calculateCharge(daysRented);
     }
 
     public int getFrequentRenterPoints(int daysRented) {
-        return priceCode.calculateFrequentRenterPoints(daysRented);
+        return pointsCalculator.calculatePoints(daysRented);
     }
 }

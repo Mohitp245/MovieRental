@@ -1,7 +1,16 @@
 public class Main {
     public static void main(String[] args) {
-        Movie movie1 = new Movie("The Matrix", Prices.NEW_RELEASE);
-        Movie movie2 = new Movie("Frozen", Prices.CHILDRENS);
+        Movie movie1 = new Movie(
+            "The Matrix",
+            new NewReleasePriceCalculator(),
+            new NewReleasePointsCalculator()
+        );
+        Movie movie2 = new Movie(
+            "Frozen",
+            new ChildrensPriceCalculator(),
+            new ChildrensPointsCalculator()
+        );
+
         Rental rental1 = new Rental(movie1, 3);
         Rental rental2 = new Rental(movie2, 5);
 
