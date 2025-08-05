@@ -5,4 +5,3 @@ public class RegularPointsCalculator implements FrequentRenterPointsCalculator {
         return 1;
     }
 }
-
