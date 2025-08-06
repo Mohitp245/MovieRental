@@ -13,6 +13,7 @@ public class Main {
 
         Rental rental1 = new Rental(movie1, 3);
         Rental rental2 = new Rental(movie2, 5);
+        rental1.setDiscountPolicy(new HalfOffCoupon());  // Apply 50% off coupon
 
         Customer customer = new Customer("Alice");
         customer.addRental(rental1);
@@ -20,5 +21,7 @@ public class Main {
 
         Statement statement = new Statement(customer);
         System.out.println(statement.printStatement());
+        System.out.println("Rental 1 original price: " + rental1.getCharge());
+        System.out.println("Rental 1 with 50% off: " + rental1.getDiscountedCharge());
     }
 }

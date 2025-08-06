@@ -13,8 +13,8 @@ public class Statement {
         result.append(customer.getName()).append("\n");
 
         for (Rental rental : customer.getRentals()) {
-            double currentAmount = calculateRentalAmount(rental);
-            frequentRenterPoints += calculateFrequentRenterPoints(rental);
+            double currentAmount = rental.getDiscountedCharge();
+            frequentRenterPoints += calculateFrequentRenterPoints(currentAmount);
 
             result.append(buildRentalLine(rental, currentAmount));
             totalAmount += currentAmount;
@@ -28,9 +28,9 @@ public class Statement {
         return rental.getCharge();
     }
 
-    private int calculateFrequentRenterPoints(Rental rental) {
+    private int calculateFrequentRenterPoints(double charge) {
         int points = 1;
-        points += rental.getCharge();
+        points += charge;
         return points;
     }
 
