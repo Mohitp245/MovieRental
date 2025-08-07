@@ -22,7 +22,14 @@ public class Customer {
     
     public List<Rental> getRentals() {
     return customerRentals;
-}
+    }
 
+    public int getTotalFrequentRenterPoints() {
+        int totalPoints = 0;
+        for (Rental rental : customerRentals) {
+            totalPoints += rental.getFrequentRenterPoints();
+        }
+        return totalPoints;
+    }
 }
 

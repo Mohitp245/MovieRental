@@ -1,0 +1,15 @@
+public class FreeRentalCoupon implements DiscountPolicy {
+    private final Customer customer;
+
+    public FreeRentalCoupon(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public double applyDiscount(Rental rental, double charge) {
+        if (customer.getTotalFrequentRenterPoints() >= 10) {
+            return 0.0; // one rental free
+        }
+        return charge;
+    }
+}

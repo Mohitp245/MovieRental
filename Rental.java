@@ -2,6 +2,7 @@ public class Rental {
 
     private final Movie movie;
     private final int daysRented;
+    private DiscountPolicy discountPolicy;
 
     public Rental(Movie movie, int daysRented) {
         this.movie = movie;
@@ -22,5 +23,17 @@ public class Rental {
 
     public int getFrequentRenterPoints() {
         return movie.getFrequentRenterPoints(daysRented);
+    }
+    
+    public void setDiscountPolicy(DiscountPolicy policy) {
+        this.discountPolicy = policy;
+    }
+    
+    public double getDiscountedCharge() {
+        double original = getCharge(); // assumes getCharge() gives full price
+        if (discountPolicy != null) {
+            return discountPolicy.applyDiscount(this, original);
+        }
+        return original;
     }
 }
