@@ -1,7 +1,7 @@
-public class FreeRentalCoupon implements DiscountPolicy {
+public class FreeMovieCoupon implements DiscountPolicy {
     private final Customer customer;
 
-    public FreeRentalCoupon(Customer customer) {
+    public FreeMovieCoupon(Customer customer) {
         this.customer = customer;
     }
 
