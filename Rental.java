@@ -29,6 +29,7 @@ public class Rental implements Transaction {
         this.discountPolicy = policy;
     }
     
+    @Override
     public double getDiscountedCharge() {
         double original = getCharge(); // assumes getCharge() gives full price
         if (discountPolicy != null) {
@@ -41,13 +42,5 @@ public class Rental implements Transaction {
     public String getTitle() {
         return movie.getTitle();
     }
-
-    @Override
-    public double getDiscountedCharge() {
-        double original = getCharge();
-        if (discountPolicy != null) {
-            return discountPolicy.applyDiscount(this, original);
-        }
-        return original;
-    }
 }
+//test 
