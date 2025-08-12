@@ -12,6 +12,10 @@ public class Customer {
         this.customerName = name;
     }
 
+    public String getName() {
+        return customerName;
+    }
+
     public void addTransaction(Transaction t) {
         transactions.add(t);
     }
