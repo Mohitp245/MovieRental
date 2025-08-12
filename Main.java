@@ -1,62 +1,71 @@
 public class Main {
     public static void main(String[] args) {
-        Movie movie1 = new Movie(
-            "The Matrix",
+        // Create movies with different pricing and points calculators
+        Movie newReleaseMovie = new Movie(
+            "The Matrix Resurrections",
             new NewReleasePriceCalculator(),
             new NewReleasePointsCalculator()
         );
-        Movie movie2 = new Movie(
-            "Frozen",
+
+        Movie childrenMovie = new Movie(
+            "Frozen II",
             new ChildrensPriceCalculator(),
             new ChildrensPointsCalculator()
         );
 
-        Rental rental1 = new Rental(movie1, 3);
-        Rental rental2 = new Rental(movie2, 5);
-        rental1.setDiscountPolicy(new HalfOffCoupon());  // Apply 50% off coupon
-
-        Customer customer1 = new Customer("Alice");
-        customer1.addRental(rental1);
-        customer1.addRental(rental2);
-
-        Movie movie3 = new Movie(
-            "The Matrix",
-            new NewReleasePriceCalculator(),
-            new NewReleasePointsCalculator()
-        );
-        Movie movie4 = new Movie(
-            "Amazing Spiderman",
-            new ChildrensPriceCalculator(),
-            new ChildrensPointsCalculator()
-        );
-
-        // ADD THESE LINES (start)
-        Movie movie5 = new Movie(
-            "Oppenheimer",
+        Movie regularMovie = new Movie(
+            "The Godfather",
             new RegularPriceCalculator(),
             new RegularPointsCalculator()
         );
 
-        Customer customer2 = new Customer("Bob");
+        // Create customers
+        Customer alice = new Customer("Alice");
+        Customer bob = new Customer("Bob");
+        Customer carol = new Customer("Carol");
 
-        // Add 4 rentals first
-        customer2.addRental(new Rental(movie1, 1));
-        customer2.addRental(new Rental(movie2, 2));
-        customer2.addRental(new Rental(movie3, 2));
-        customer2.addRental(new Rental(movie4, 3));
+        // Alice rents new release and children movies
+        Rental aliceRental1 = new Rental(newReleaseMovie, 4); // 4 days
+        Rental aliceRental2 = new Rental(childrenMovie, 3);   // 3 days
 
-        // Add the 5th rental with the BulkRentalCoupon
-        Rental rental5 = new Rental(movie5, 3);
-        rental5.setDiscountPolicy(new BulkRentalCoupon(customer2));
-        customer2.addRental(rental5);
-        // ADD THESE LINES (end)
+        // Apply HalfOffCoupon to first rental for Alice
+        aliceRental1.setDiscountPolicy(new HalfOffCoupon());
 
-        Statement statement1 = new Statement(customer1);
-        System.out.println(statement1.printStatement());
-        System.out.println("Rental 1 original price: " + rental1.getCharge());
-        System.out.println("Rental 1 with 50% off: " + rental1.getDiscountedCharge() + "\n");
+        alice.addTransaction(aliceRental1);
+        alice.addTransaction(aliceRental2);
 
-        Statement statement2 = new Statement(customer2);
-        System.out.println(statement2.printStatement());
+        // Bob rents multiple movies to test BulkRentalCoupon
+        bob.addTransaction(new Rental(newReleaseMovie, 1));
+        bob.addTransaction(new Rental(childrenMovie, 2));
+        bob.addTransaction(new Rental(regularMovie, 2));
+        bob.addTransaction(new Rental(childrenMovie, 3));
+
+        Rental bobRental5 = new Rental(regularMovie, 4);
+        bobRental5.setDiscountPolicy(new BulkRentalCoupon(bob)); // Bulk discount applies on 5+ rentals
+        bob.addTransaction(bobRental5);
+
+        // Carol rents a movie and should get it free via FreeRentalCoupon
+        Rental carolRental = new Rental(regularMovie, 5);
+        carolRental.setDiscountPolicy(new FreeMovieCoupon(carol));
+        carol.addTransaction(carolRental);
+
+        // Print statements for all customers
+        System.out.println("=== Alice's Statement ===");
+        Statement aliceStatement = new Statement(alice);
+        System.out.println(aliceStatement.printStatement());
+
+        System.out.println("\n=== Bob's Statement ===");
+        Statement bobStatement = new Statement(bob);
+        System.out.println(bobStatement.printStatement());
+
+        System.out.println("\n=== Carol's Statement ===");
+        Statement carolStatement = new Statement(carol);
+        System.out.println(carolStatement.printStatement());
+
+        // Also show frequent renter points for each customer
+        System.out.println("Frequent Renter Points:");
+        System.out.println("Alice: " + alice.getTotalFrequentRenterPoints());
+        System.out.println("Bob: " + bob.getTotalFrequentRenterPoints());
+        System.out.println("Carol: " + carol.getTotalFrequentRenterPoints());
     }
 }

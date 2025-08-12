@@ -8,4 +8,9 @@ public class ChildrensPriceCalculator implements PriceCalculator {
         }
         return result;
     }
+
+    @Override
+    public double calculateSaleCharge(int quantity) {
+        return quantity * 10.0; // Example price for new releases
+    }
 }
