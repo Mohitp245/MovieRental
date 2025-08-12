@@ -1,4 +1,3 @@
 public interface DiscountPolicy {
-    double applyDiscount(Rental rental, double originalPrice);
+    double applyDiscount(Transaction transaction, double originalPrice);
 }
-

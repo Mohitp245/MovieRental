@@ -12,11 +12,10 @@ public class Statement {
         StringBuilder result = new StringBuilder("Rental Record for ");
         result.append(customer.getName()).append("\n");
 
-        for (Rental rental : customer.getRentals()) {
-            double currentAmount = rental.getDiscountedCharge();
-            frequentRenterPoints += calculateFrequentRenterPoints(currentAmount);
-
-            result.append(buildRentalLine(rental, currentAmount));
+        for (Transaction t : customer.getTransactions()) {
+            double currentAmount = t.getDiscountedCharge();
+            frequentRenterPoints += t.getFrequentRenterPoints();
+            result.append("\t").append(t.getTitle()).append("\t").append(currentAmount).append("\n");
             totalAmount += currentAmount;
         }
 

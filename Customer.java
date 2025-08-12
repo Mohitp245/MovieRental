@@ -5,29 +5,25 @@ import java.util.List;
 public class Customer {
 
     private final String customerName;
-    private final ArrayList<Rental> customerRentals = new ArrayList<>();
+    private final ArrayList<Transaction> transactions = new ArrayList<>();
+
 
     public Customer(String name) {
         this.customerName = name;
     }
 
-    public void addRental(Rental title) {
-        customerRentals.add(title);
+    public void addTransaction(Transaction t) {
+        transactions.add(t);
     }
-
-    public String getName() {
-        return customerName;
-    }
-
     
-    public List<Rental> getRentals() {
-    return customerRentals;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
-
+    
     public int getTotalFrequentRenterPoints() {
         int totalPoints = 0;
-        for (Rental rental : customerRentals) {
-            totalPoints += rental.getFrequentRenterPoints();
+        for (Transaction t : transactions) {
+            totalPoints += t.getFrequentRenterPoints();
         }
         return totalPoints;
     }

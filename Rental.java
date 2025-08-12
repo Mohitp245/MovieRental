@@ -1,4 +1,4 @@
-public class Rental {
+public class Rental implements Transaction {
 
     private final Movie movie;
     private final int daysRented;
@@ -31,6 +31,20 @@ public class Rental {
     
     public double getDiscountedCharge() {
         double original = getCharge(); // assumes getCharge() gives full price
+        if (discountPolicy != null) {
+            return discountPolicy.applyDiscount(this, original);
+        }
+        return original;
+    }
+
+    @Override
+    public String getTitle() {
+        return movie.getTitle();
+    }
+
+    @Override
+    public double getDiscountedCharge() {
+        double original = getCharge();
         if (discountPolicy != null) {
             return discountPolicy.applyDiscount(this, original);
         }
