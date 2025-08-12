@@ -16,7 +16,7 @@ public class Sale implements Transaction {
 
     @Override
     public double getCharge() {
-        return movie.getPriceCalculator().calculateSaleCharge(quantity);
+        return movie.getCharge(quantity);
     }
 
     @Override
