@@ -46,7 +46,7 @@ public class Main {
 
         // Carol rents a movie and should get it free via FreeRentalCoupon
         Rental carolRental = new Rental(regularMovie, 5);
-        carolRental.setDiscountPolicy(new FreeRentalCoupon(carol));
+        carolRental.setDiscountPolicy(new FreeMovieCoupon(carol));
         carol.addTransaction(carolRental);
 
         // Print statements for all customers
