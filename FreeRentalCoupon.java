@@ -6,7 +6,7 @@ public class FreeRentalCoupon implements DiscountPolicy {
     }
 
     @Override
-    public double applyDiscount(Rental rental, double charge) {
+    public double applyDiscount(Transaction transaction, double charge) {
         if (customer.getTotalFrequentRenterPoints() >= 10) {
             return 0.0; // one rental free
         }
